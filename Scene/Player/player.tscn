@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://ccqlvicfg44ji"]
+
+[ext_resource type="Script" uid="uid://u3tura2bsd2b" path="res://Scene/Player/player.gd" id="1_67a6e"]
+[ext_resource type="Script" uid="uid://dx5irxnm2cqtt" path="res://Scene/Player/camera_3d.gd" id="2_yic5t"]
+[ext_resource type="PackedScene" uid="uid://cavauc55e2v1i" path="res://Scene/Player/Object/枪/gun.tscn" id="3_uuj77"]
+[ext_resource type="Shader" uid="uid://cg4u4ftulg0gj" path="res://Scene/Player/后处理.gdshader" id="4_g0r71"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d8fr4"]
+radial_segments = 8
+rings = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cq2im"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_mwb8w"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88wa8"]
+render_priority = 0
+shader = ExtResource("4_g0r71")
+shader_parameter/dispersion_strength = 0.0025
+
+[sub_resource type="QuadMesh" id="QuadMesh_ita4j"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1765428193]
+script = ExtResource("1_67a6e")
+head_bob_speed = 3.0
+head_bob_intensity = 0.0
+head_bob_sway_intensity = 0.5
+max_rope_length = 1.0
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=690682630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6938957, -0.13383365)
+target_position = Vector3(0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1234567067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_d8fr4")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="." unique_id=213022005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_cq2im")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=2007173976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6938957, 0)
+
+[node name="Marker3D" type="Marker3D" parent="Node3D" unique_id=50959497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33010924, -1.3928332)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1315283657]
+fov = 90.0
+script = ExtResource("2_yic5t")
+
+[node name="gun" parent="Node3D" unique_id=128629694 instance=ExtResource("3_uuj77")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.9862573, -0.7734896, -1.2051611)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=2116662051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.889892)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_mwb8w")
+surface_material_override/0 = SubResource("ShaderMaterial_88wa8")
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=118835259]
+
+[node name="Control" type="Control" parent="." unique_id=1317775178]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Control" unique_id=464071201]
+position = Vector2(-1.0000057, 0)
+scale = Vector2(11.999989, 1)
+mesh = SubResource("QuadMesh_ita4j")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Control" unique_id=2079163117]
+position = Vector2(-1.0000057, 0)
+rotation = 1.5707964
+scale = Vector2(11.999989, 1)
+mesh = SubResource("QuadMesh_ita4j")
+
+[node name="GrappleRope" type="CSGCylinder3D" parent="." unique_id=1368982827]
+radius = 0.1

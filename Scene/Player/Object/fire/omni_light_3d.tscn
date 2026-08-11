@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b0j6t74gikohg"]
+
+[ext_resource type="Script" uid="uid://f1fm7eabnwe4" path="res://Scene/Player/Object/fire/omni_light_3d.gd" id="1_eg3q4"]
+
+[node name="OmniLight3D" type="OmniLight3D" unique_id=112138865]
+light_color = Color(0.8455701, 0.37567297, 0, 1)
+light_energy = 11.772
+omni_range = 21.899
+omni_attenuation = 2.0
+omni_shadow_mode = 0
+script = ExtResource("1_eg3q4")

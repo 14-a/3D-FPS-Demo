@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cyeod3a2mupes"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k4j0n"]
+lifetime_randomness = 0.56
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, -3, 0)
+scale_min = 0.19999999
+scale_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_utt0w"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.97
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_k4j0n"]
+material = SubResource("StandardMaterial3D_utt0w")
+size = Vector2(0.1, 0.1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" unique_id=1615887512]
+emitting = false
+amount = 300
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_k4j0n")
+draw_pass_1 = SubResource("QuadMesh_k4j0n")

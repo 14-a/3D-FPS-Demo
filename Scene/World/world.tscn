@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://cdn317dx8yl4h"]
+
+[ext_resource type="Shader" uid="uid://cbfj5mchapew5" path="res://Scene/World/Sky.gdshader" id="1_1m7mk"]
+[ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://Scene/Player/player.tscn" id="1_8r6ai"]
+[ext_resource type="Script" uid="uid://cl33qpw3c1430" path="res://Scene/World/directional_light_3d.gd" id="1_lf8yd"]
+[ext_resource type="Material" uid="uid://wnbfjgjftp6i" path="res://Texture/LevelMoulde/Well.tres" id="1_r1x3d"]
+[ext_resource type="Script" uid="uid://d2y067ohr7st4" path="res://Scene/World/npc.gd" id="5_1m7mk"]
+[ext_resource type="PackedScene" uid="uid://dvtlrods3s02i" path="res://Scene/NPC/npc.tscn" id="6_lf8yd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cq2im"]
+shader = ExtResource("1_1m7mk")
+shader_parameter/rayleigh_strength = 1.0
+shader_parameter/mie_strength = 1.0
+shader_parameter/ozone_strength = 1.0
+shader_parameter/atmosphere_density = 1.0
+shader_parameter/exposure = 10.0
+shader_parameter/sun_disc_feather = 0.1
+shader_parameter/sundisc_intensity = 10.0
+shader_parameter/use_debanding = true
+
+[sub_resource type="Sky" id="Sky_bhlvr"]
+sky_material = SubResource("ShaderMaterial_cq2im")
+
+[sub_resource type="Environment" id="Environment_cq2im"]
+background_mode = 2
+sky = SubResource("Sky_bhlvr")
+tonemap_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+ssao_radius = 0.67
+ssao_power = 1.3518763
+ssao_detail = 5.0
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_cascades = 8
+sdfgi_min_cell_size = 0.05
+glow_enabled = true
+
+[node name="World" type="Node" unique_id=787426329]
+
+[node name="Level" type="Node3D" parent="." unique_id=1128845240]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level" unique_id=1798206386]
+transform = Transform3D(-0.9239761, 0.29184273, -0.24717611, -0.13786325, 0.34868464, 0.9270452, 0.3567379, 0.890644, -0.2819419, 0, 0, 0)
+light_color = Color(1, 0.98634124, 0.96378106, 1)
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_reverse_cull_face = true
+script = ExtResource("1_lf8yd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level" unique_id=1057745241]
+environment = SubResource("Environment_cq2im")
+
+[node name="Player" parent="Level" unique_id=1765428193 instance=ExtResource("1_8r6ai")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.22762644, -0.7625457, 0.87787557)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level" unique_id=931932958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.964342)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=2082150737]
+transform = Transform3D(11.998069, 0, 0, 0, 0.21319312, 0, 0, 0, 51.464962, -0.0030351467, -1.6002064, -3.0701294)
+material = ExtResource("1_r1x3d")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1945367725]
+transform = Transform3D(0.12203921, 0, 0, 0, 5.969311, 0, 0, 0, 40.06394, 5.8249774, 0.6883459, -2.1604786)
+material = ExtResource("1_r1x3d")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=73434102]
+transform = Transform3D(0.12203921, 0, 0, 0, 5.969311, 0, 0, 0, 37.900486, -5.862032, 0.6883459, -2.9068346)
+material = ExtResource("1_r1x3d")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=2073275091]
+transform = Transform3D(14.891842, 0, 0, 0, 5.969311, 0, 0, 0, 0.63941824, -0.062900394, 0.6883459, 13.50837)
+material = ExtResource("1_r1x3d")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level/CSGCombiner3D" unique_id=1185837569]
+transform = Transform3D(14.891842, 0, 0, 0, 5.969311, 0, 0, 0, 0.63941824, -0.062900394, 0.6883459, -20.365688)
+material = ExtResource("1_r1x3d")
+
+[node name="NPC" type="Node" parent="." unique_id=1344762588]
+script = ExtResource("5_1m7mk")
+
+[node name="NPC2" parent="NPC" unique_id=164996285 instance=ExtResource("6_lf8yd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74250746, -0.49361038, -6.6233606)
+
+[node name="NPC" parent="NPC" unique_id=211740886 instance=ExtResource("6_lf8yd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4530787, -0.49361038, -10.206346)
+
+[connection signal="Event" from="Level/Player" to="." method="_on_player_event"]

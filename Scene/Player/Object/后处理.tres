@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://chs8a0la27dgr"]
+
+[ext_resource type="Shader" uid="uid://cg4u4ftulg0gj" path="res://Scene/Player/后处理.gdshader" id="1_ovc8s"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ovc8s")
+shader_parameter/dispersion_strength = 0.0025

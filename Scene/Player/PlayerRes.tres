@@ -1,0 +1,7 @@
+[gd_resource type="Resource" format=3 uid="uid://dr74chx05kxie"]
+
+[ext_resource type="Script" uid="uid://0xivudhhh4tf" path="res://Scene/Player/PlayerRes.gd" id="1_urp8s"]
+
+[resource]
+script = ExtResource("1_urp8s")
+EventList = Array[String](["fire"])
