@@ -37,9 +37,6 @@ signal Event(type)
 
 var is_grappling: bool = false
 var grapple_point: Vector3 = Vector3.ZERO
-# 也可保留原有字典，但推荐使用单独变量
-# var playerStudeLits = {"point" : Vector3.ZERO, "hooked" : false}
-# --------------------------------
 
 func _ready() -> void:
 	ViewRay.target_position = Vector3(0,0,-30)
@@ -136,6 +133,8 @@ func _Player_Event() -> void:
 				body.linear_velocity += -camera.global_transform.basis.z * 5
 			if body is CharacterBody3D:
 				body.velocity += -camera.global_transform.basis.z * 2
+				if "NPC" in body.name:
+					body._扣血(10)
 	
 	if Input.is_action_just_pressed("投手雷"):
 		throw_grenade()
@@ -206,3 +205,7 @@ func throw_grenade():
 	grenade.global_position = throw_origin.global_position
 	grenade.throw(-camera.global_transform.basis.z)
 	get_tree().current_scene.add_child(grenade)
+
+func _扣血(伤害) -> void:
+	血量 -= 伤害
+	pass

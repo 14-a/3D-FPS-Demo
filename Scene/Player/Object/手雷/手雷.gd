@@ -73,6 +73,7 @@ func _on_explode():
 			var distance = body.global_position.distance_to(global_position)
 			var force = 100.0 / max(distance, 1.0) 
 			body.velocity += direction * force
+			body._扣血(force)
 			
 	
 	for result in results:
