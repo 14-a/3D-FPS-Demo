@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dx5irxnm2cqtt" path="res://Scene/Player/camera_3d.gd" id="2_yic5t"]
 [ext_resource type="PackedScene" uid="uid://cavauc55e2v1i" path="res://Scene/Player/Object/枪/gun.tscn" id="3_uuj77"]
 [ext_resource type="Shader" uid="uid://cg4u4ftulg0gj" path="res://Scene/Player/后处理.gdshader" id="4_g0r71"]
+[ext_resource type="Texture2D" uid="uid://bb3vibx2g466k" path="res://Scene/Player/Object/fuck/fuck.png" id="5_88wa8"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d8fr4"]
 radial_segments = 8
@@ -21,6 +22,17 @@ shader = ExtResource("4_g0r71")
 shader_parameter/dispersion_strength = 0.0025
 
 [sub_resource type="QuadMesh" id="QuadMesh_ita4j"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ikjjr"]
+size = Vector2(200, 10)
+center_offset = Vector3(100, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_88wa8"]
+offsets = PackedFloat32Array(0.5611511)
+colors = PackedColorArray(1, 0.19, 0.19, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_88wa8"]
+gradient = SubResource("Gradient_88wa8")
 
 [node name="Player" type="CharacterBody3D" unique_id=1765428193]
 script = ExtResource("1_67a6e")
@@ -57,7 +69,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.98
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=2116662051]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.889892)
-visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_mwb8w")
 surface_material_override/0 = SubResource("ShaderMaterial_88wa8")
@@ -88,6 +99,38 @@ position = Vector2(-1.0000057, 0)
 rotation = 1.5707964
 scale = Vector2(11.999989, 1)
 mesh = SubResource("QuadMesh_ita4j")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="Control" unique_id=281132213]
+position = Vector2(-456, 310)
+mesh = SubResource("QuadMesh_ikjjr")
+texture = SubResource("GradientTexture1D_88wa8")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="Control" unique_id=778633273]
+position = Vector2(-456, 310)
+mesh = SubResource("QuadMesh_ikjjr")
+
+[node name="Label" type="Label" parent="Control" unique_id=1412192766]
+layout_mode = 0
+offset_left = -526.0
+offset_top = 297.0
+offset_right = -465.0
+offset_bottom = 320.0
+text = "Health: "
+
+[node name="Fuck" type="Sprite2D" parent="Control" unique_id=250106491]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-1.999999, -0.9999981)
+scale = Vector2(5, 5)
+texture = ExtResource("5_88wa8")
+
+[node name="Label2" type="Label" parent="Control" unique_id=820597281]
+layout_mode = 0
+offset_left = -94.0
+offset_top = -26.0
+offset_right = -7.0
+offset_bottom = -3.0
+scale = Vector2(2, 2)
+text = "Game Over"
 
 [node name="GrappleRope" type="CSGCylinder3D" parent="." unique_id=1368982827]
 radius = 0.1

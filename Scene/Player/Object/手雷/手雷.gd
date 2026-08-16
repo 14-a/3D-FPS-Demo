@@ -63,13 +63,25 @@ func _on_explode():
 	visible = false
 	
 	var overlapping_bodies = $Area3D.get_overlapping_bodies()
+	var CheskFuck = RayCast3D.new()
+	#CheskFuck.transform = transform
+	get_tree().current_scene.add_child(CheskFuck)
 	
 	var results = overlapping_bodies
 	for result in results:
 		var body = result
 		if body is CharacterBody3D:
-			var direction = (body.global_position - global_position).normalized()
-			# 距离越近力越大
+			CheskFuck.target_position = body.global_position - global_position
+			##只对没被遮挡的物体进行爆炸处理逻辑
+			#if CheskFuck.is_colliding():
+				#if CheskFuck.get_collider() is CharacterBody3D:
+					#var direction = CheskFuck.target_position.normalized()
+					## 距离越近力越大
+					#var distance = body.global_position.distance_to(global_position)
+					#var force = 100.0 / max(distance, 1.0) 
+					#body.velocity += direction * force
+					#body._扣血(force)
+			var direction = CheskFuck.target_position.normalized()
 			var distance = body.global_position.distance_to(global_position)
 			var force = 100.0 / max(distance, 1.0) 
 			body.velocity += direction * force
@@ -79,11 +91,14 @@ func _on_explode():
 	for result in results:
 		var body = result
 		if body is RigidBody3D:
-			var direction = (body.global_position - global_position).normalized()
-			# 距离越近力越大
-			var distance = body.global_position.distance_to(global_position)
-			var force = 50.0 / max(distance, 1.0) 
-			body.linear_velocity += direction * force
+			CheskFuck.target_position = body.global_position - global_position
+			if CheskFuck.is_colliding():
+				if CheskFuck.get_collider() is RigidBody3D:
+					var direction = CheskFuck.target_position.normalized()
+					# 距离越近力越大
+					var distance = body.global_position.distance_to(global_position)
+					var force = 50.0 / max(distance, 1.0) 
+					body.linear_velocity += direction * force
 		
 		if body.name == "Player":
 			var direction = (body.global_position - global_position).normalized()
@@ -95,5 +110,5 @@ func _on_explode():
 	
 	await get_tree().create_timer(particle_lifetime + 0.5).timeout
 	explosion_instance.queue_free()
-
+	CheskFuck.queue_free()
 	queue_free()

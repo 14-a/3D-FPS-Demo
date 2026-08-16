@@ -14,7 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	light_energy += (0 - light_energy) * a
+	light_energy += (0 - light_energy) * delta * a * 100
 	if light_energy < 0.01: 
 		queue_free()
 	pass

@@ -1,3 +1,6 @@
+
+## 用于NPC的一些数据
+## 状态为0时时待机，1时是巡逻, 2时是追逐, 3时是攻击
 extends Resource
 
 @export var 运动向量 : Vector3 = Vector3()

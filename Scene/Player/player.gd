@@ -6,6 +6,9 @@ extends CharacterBody3D
 @onready var gun = $Node3D/gun
 @onready var throw_origin = $Node3D/Marker3D
 @onready var rope_mesh : CSGCylinder3D = $GrappleRope          # 新增：绳索绘制节点
+@onready var Health = $Control/MeshInstance2D4
+@onready var _Health = $Control/MeshInstance2D3
+@onready var Fuck = $Control/Fuck
 
 @export var 鼠标灵敏度 = 0.1
 @export var head_bob_speed: float = 1.5
@@ -38,6 +41,10 @@ signal Event(type)
 var is_grappling: bool = false
 var grapple_point: Vector3 = Vector3.ZERO
 
+var die = false
+
+#var 血条 = StandardMaterial3D.new()
+
 func _ready() -> void:
 	ViewRay.target_position = Vector3(0,0,-30)
 	ViewRay.add_exception($PlayerCollision)
@@ -47,7 +54,8 @@ func _ready() -> void:
 	$Node3D/gun.EventList = PlayerRes.EventList
 	
 	rope_mesh.visible = false
-
+	
+	
 	pass
 
 func _input(event: InputEvent) -> void:
@@ -58,7 +66,7 @@ func _input(event: InputEvent) -> void:
 		if 镜头轴承.rotation_degrees.x < -89: 镜头轴承.rotation_degrees.x = -89
 		ViewRay.rotation_degrees.x = 镜头轴承.rotation_degrees.x
 		
-	if Input.is_action_just_pressed("退出"):
+	if Input.is_action_just_pressed("退出") and not die:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else : 
@@ -70,19 +78,19 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor(): velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("跳") and is_on_floor():
+	if Input.is_action_just_pressed("跳") and is_on_floor() and not die:
 		velocity.y = JUMP_VELOCITY
 
-	if Input.is_action_pressed("疾跑"):
+	if Input.is_action_pressed("疾跑") and not die:
 		speed = 1.5
 		$Node3D/Camera3D.fov += (100 - $Node3D/Camera3D.fov) * .1
 	else :
 		speed = 1
 		$Node3D/Camera3D.fov += (90 - $Node3D/Camera3D.fov) * .1
 	
-	if Input.is_action_pressed("聚焦"): $Node3D/Camera3D.fov += (0 - $Node3D/Camera3D.fov) * .1
+	if Input.is_action_pressed("聚焦") and not die: $Node3D/Camera3D.fov += (0 - $Node3D/Camera3D.fov) * .1
 	
-	if Input.is_action_pressed("蹲下"):
+	if Input.is_action_pressed("蹲下") and not die:
 		$Node3D.position.y += (1 - $Node3D.position.y) * .1
 		$RayCast3D.position.y += (1 - $RayCast3D.position.y) * .1
 		$MeshInstance3D.scale.y += (0.5 - $MeshInstance3D.scale.y) * .1
@@ -102,14 +110,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * speed)
 		velocity.z = move_toward(velocity.z, 0, SPEED * speed)
-
-	move_and_slide()
+	
+	if not die: move_and_slide()
 	
 	is_moving = velocity.length() > 0.1
 	
 	#_apply_head_bob(delta)
 	
-	_Player_Event()
+	_Player_Event(delta)
 	
 	if is_grappling:
 		_update_rope_visual() 
@@ -118,7 +126,27 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("发射钩爪") and is_grappling:
 		_release_grapple()
 
-func _Player_Event() -> void: 
+func _Player_Event(delta) -> void: 
+	if 血量 < 0: 血量 = 0
+	
+	if 血量 == 0:
+		die = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Fuck.modulate.a = 1
+		gun.visible = false
+		$Control/MeshInstance2D.visible = false
+		$Control/MeshInstance2D2.visible = false
+		$Control/Label2.visible = true
+	
+	Health.scale.x += ((血量 / 100.0) - Health.scale.x) * 0.1 * delta * 50
+	_Health.scale.x = 血量 / 100.0
+	Fuck.modulate.a += (0 - Fuck.modulate.a) * 0.1 * delta * 50
+	
+	if die:
+		return
+	
+	$Control/Label2.visible = false
+	
 	if Input.is_action_just_pressed("射击"):
 		gun.Pz = -1
 		gun.Rx = 45
@@ -134,7 +162,7 @@ func _Player_Event() -> void:
 			if body is CharacterBody3D:
 				body.velocity += -camera.global_transform.basis.z * 2
 				if "NPC" in body.name:
-					body._扣血(10)
+					body._扣血(10, "player", 镜头轴承.global_position)
 	
 	if Input.is_action_just_pressed("投手雷"):
 		throw_grenade()
@@ -208,4 +236,6 @@ func throw_grenade():
 
 func _扣血(伤害) -> void:
 	血量 -= 伤害
+	Fuck.modulate.a = 1
+	camera.偏移vec.x = 伤害 / 10.0
 	pass

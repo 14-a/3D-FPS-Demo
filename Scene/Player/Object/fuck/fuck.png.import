@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg6pncjmalv7"
-path="res://.godot/imported/go_build.svg-a1495bc8f740880f85a13b79acc9433c.ctex"
+uid="uid://bb3vibx2g466k"
+path="res://.godot/imported/fuck.png-5904edd9f88ab0552c8f7f828e74a069.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/go_build/go_build.svg"
-dest_files=["res://.godot/imported/go_build.svg-a1495bc8f740880f85a13b79acc9433c.ctex"]
+source_file="res://Scene/Player/Object/fuck/fuck.png"
+dest_files=["res://.godot/imported/fuck.png-5904edd9f88ab0552c8f7f828e74a069.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

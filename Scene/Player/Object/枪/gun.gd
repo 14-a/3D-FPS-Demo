@@ -10,8 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	Pz += (0 - Pz) * 0.1
-	Rx += (0 - Rx) * 0.1
+	Pz += (0 - Pz)  * delta * 20
+	Rx += (0 - Rx)  * delta * 20
 	$CSGBakedMeshInstance3D.position.x = Pz
 	$CSGBakedMeshInstance3D.rotation_degrees.z = Rx
 	pass

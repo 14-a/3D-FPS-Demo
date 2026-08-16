@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://chnbwrbyogv55" path="res://npc.gd" id="1_uvfeq"]
 [ext_resource type="Resource" uid="uid://b1y7emutin8mf" path="res://Scene/NPC/NPC.tres" id="2_2smci"]
 [ext_resource type="Texture2D" uid="uid://brhp6pmun7ssy" path="res://Texture/PNG/Orange/texture_10.png" id="3_5wa35"]
+[ext_resource type="PackedScene" uid="uid://cavauc55e2v1i" path="res://Scene/Player/Object/枪/gun.tscn" id="4_cnkqp"]
+[ext_resource type="Texture2D" uid="uid://dvpid37aq71db" path="res://Texture/PNG/Red/texture_01.png" id="5_03uqs"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bycka"]
 
@@ -12,9 +14,45 @@ uv1_triplanar = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ita4j"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_ita4j"]
+size = Vector3(0.5, 0.3, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03uqs"]
+albedo_texture = ExtResource("5_03uqs")
+uv1_triplanar = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_mwb8w"]
+size = Vector2(1.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkit1"]
+render_priority = -1
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(1, 0, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynup4"]
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [node name="NPC" type="CharacterBody3D" unique_id=164996285]
+velocity = Vector3(0, -16.16996, 0)
 script = ExtResource("1_uvfeq")
 Res = ExtResource("2_2smci")
+"锁敌范围" = 100
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=537269328]
 mesh = SubResource("CapsuleMesh_bycka")
@@ -22,3 +60,34 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wfot4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=454433840]
 shape = SubResource("CapsuleShape3D_ita4j")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1966632209]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="gun" parent="Node3D" unique_id=128629694 instance=ExtResource("4_cnkqp")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.5073277, 0.2412396, 0.41409653)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D" unique_id=1466891717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31012124, 0.5380202, 2.3839535e-09)
+mesh = SubResource("BoxMesh_ita4j")
+surface_material_override/0 = SubResource("StandardMaterial3D_03uqs")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=95161780]
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1292541145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51451147, 0.117017806)
+target_position = Vector3(0, 0, -10)
+
+[node name="RayCast3D2" type="RayCast3D" parent="." unique_id=274883438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.161, 0)
+target_position = Vector3(0, 0, -100)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=522906511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14, 0)
+mesh = SubResource("QuadMesh_mwb8w")
+surface_material_override/0 = SubResource("StandardMaterial3D_mkit1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1850683503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14, 0)
+mesh = SubResource("QuadMesh_mwb8w")
+surface_material_override/0 = SubResource("StandardMaterial3D_ynup4")
