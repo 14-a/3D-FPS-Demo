@@ -96,6 +96,11 @@ enabled=PackedStringArray("res://addons/cyclops_level_builder/plugin.cfg")
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+"切换武器"={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
 
 [physics]
 
@@ -104,12 +109,8 @@ enabled=PackedStringArray("res://addons/cyclops_level_builder/plugin.cfg")
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-global_illumination/gi/use_half_resolution=true
-global_illumination/voxel_gi/quality=1
 environment/ssao/quality=4
 environment/ssao/half_size=false
 environment/ssil/quality=4
 environment/ssil/half_size=false
-global_illumination/sdfgi/probe_ray_count=5
-global_illumination/sdfgi/frames_to_update_lights=0
 occlusion_culling/use_occlusion_culling=true

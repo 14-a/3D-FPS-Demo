@@ -1,3 +1,4 @@
+
 extends CharacterBody3D
 class_name NPC
 
@@ -6,7 +7,7 @@ class_name NPC
 @export var Res : Resource
 @export var 锁敌范围 = 20
 
-@export var 开火距离 = 10
+@export var 开火距离 = 3
 
 var 血量 = 100
 
@@ -47,7 +48,7 @@ func _ready() -> void:
 	
 	ViewInWorld.target_position = Vector3(0,0,-100)
 	
-	timer.wait_time = 1
+	timer.wait_time = 0.25
 	add_child(timer)
 	timer.timeout.connect(_Fire)
 	timer.start()

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ctoe1g3c3gjf"]
+
+[ext_resource type="Texture2D" uid="uid://c63k5rfctu726" path="res://Texture/PNG/Light/texture_07.png" id="1_h8b3s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivdv2"]
+albedo_texture = ExtResource("1_h8b3s")
+uv1_triplanar = true
+
+[node name="刀" type="Node3D" unique_id=638580438]
+transform = Transform3D(-4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0, 1, 0.05542904, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=622820061]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.0576635, -0.063209474, 0.568504)
+material_override = SubResource("StandardMaterial3D_ivdv2")
+size = Vector3(1, 0.14611816, 0.3388672)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="." unique_id=739345605]
+transform = Transform3D(-4.3711385e-08, -0.99999994, -4.371139e-08, 0, -4.3711385e-08, 1, -0.99999994, 4.3711385e-08, 1.9106855e-15, 0.95451415, 0, 0.05171159)
+material_override = SubResource("StandardMaterial3D_ivdv2")
+polygon = PackedVector2Array(0.005494237, 0.8110926, 0, 1, 1.8362945, 0.98682296, 1.4125755, 0.79055774)
+depth = 0.07
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=823515462]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.0143812895, -0.061086535, 0.031068057)
+material_override = SubResource("StandardMaterial3D_ivdv2")
+size = Vector3(0.14404297, 0.43841553, 0.6652832)

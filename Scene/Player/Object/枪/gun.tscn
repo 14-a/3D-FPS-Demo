@@ -15,9 +15,10 @@ _surfaces = [{
 }]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aajaf"]
-render_priority = 10
+render_priority = -5
 albedo_texture = ExtResource("1_p6b1p")
 uv1_triplanar = true
+stencil_flags = 2
 
 [node name="gun" type="Node3D" unique_id=128629694]
 script = ExtResource("1_aajaf")

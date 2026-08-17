@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var 镜头轴承 = $Node3D
 @onready var ViewRay = $RayCast3D
 @onready var camera: Camera3D = $Node3D/Camera3D
-@onready var gun = $Node3D/gun
+@onready var gun = $Node3D/HandObject/gun
 @onready var throw_origin = $Node3D/Marker3D
 @onready var rope_mesh : CSGCylinder3D = $GrappleRope          # 新增：绳索绘制节点
 @onready var Health = $Control/MeshInstance2D4
@@ -21,6 +21,10 @@ extends CharacterBody3D
 @export var max_rope_length: float = 25.0       # 绳索最大拉伸长度（超过则拉回）
 @export var rope_stiffness: float = 0.9         # 弹性系数（0~1），1为刚性
 # -----------------------------
+
+@export var 武器列表 : Array[Node3D]
+var 当前武器 : Node
+var 当前武器索引 = 0
 
 var 血量 = 100
 
@@ -43,6 +47,8 @@ var grapple_point: Vector3 = Vector3.ZERO
 
 var die = false
 
+var OverStart = 0
+
 #var 血条 = StandardMaterial3D.new()
 
 func _ready() -> void:
@@ -51,7 +57,7 @@ func _ready() -> void:
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	$Node3D/gun.EventList = PlayerRes.EventList
+	$Node3D/HandObject/gun.EventList = PlayerRes.EventList
 	
 	rope_mesh.visible = false
 	
@@ -111,7 +117,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED * speed)
 		velocity.z = move_toward(velocity.z, 0, SPEED * speed)
 	
-	if not die: move_and_slide()
+	if not die:
+		move_and_slide()
+		camera.偏移vec.z += ((input_dir.x * -15)- camera.偏移vec.z) * 0.1 *delta * 20
 	
 	is_moving = velocity.length() > 0.1
 	
@@ -127,6 +135,9 @@ func _physics_process(delta: float) -> void:
 		_release_grapple()
 
 func _Player_Event(delta) -> void: 
+	当前武器 = 武器列表[当前武器索引 % 武器列表.size()]
+	当前武器.visible = true
+	
 	if 血量 < 0: 血量 = 0
 	
 	if 血量 == 0:
@@ -137,6 +148,9 @@ func _Player_Event(delta) -> void:
 		$Control/MeshInstance2D.visible = false
 		$Control/MeshInstance2D2.visible = false
 		$Control/Label2.visible = true
+		
+		if OverStart == 1:
+			_OVERSTART(delta)
 	
 	Health.scale.x += ((血量 / 100.0) - Health.scale.x) * 0.1 * delta * 50
 	_Health.scale.x = 血量 / 100.0
@@ -171,6 +185,10 @@ func _Player_Event(delta) -> void:
 	if Input.is_action_just_pressed("发射钩爪"):
 		_attempt_grapple()
 	# ----------------------------------------
+	
+	if Input.is_action_just_pressed("切换武器"):
+		当前武器.visible = false
+		当前武器索引 += 1
 	pass
 
 func _attempt_grapple():
@@ -239,3 +257,15 @@ func _扣血(伤害) -> void:
 	Fuck.modulate.a = 1
 	camera.偏移vec.x = 伤害 / 10.0
 	pass
+
+func _OVERSTART(delta) -> void:
+	$Control/MeshInstance2D5.position.x += (0 - $Control/MeshInstance2D5.position.x) * 0.1 * delta * 20
+	if abs(0 - $Control/MeshInstance2D5.position.x) < 1000: get_tree().reload_current_scene()
+	if $Control/MeshInstance2D5.position.x > -3000:
+		$Control/MeshInstance2D5.position.x = 0
+		$Control/MeshInstance2D5.position.x += (14979.0 - $Control/MeshInstance2D5.position.x) * 0.1 * delta * 20
+	pass
+
+func _Over_Start() -> void:
+	OverStart = 1
+	pass # Replace with function body.
