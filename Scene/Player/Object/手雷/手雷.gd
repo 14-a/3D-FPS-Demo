@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var fuse_time: float = 3.0  # 3秒引爆
+@export var fuse_time: float = 1.5
 @export var explosion_damage: float = 100.0
 @export var explosion_radius: float = 8.0
 

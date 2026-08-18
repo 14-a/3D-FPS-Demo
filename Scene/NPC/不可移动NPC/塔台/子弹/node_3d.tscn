@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cgndrl6ogj6le"]
+
+[ext_resource type="Script" uid="uid://bxieajqedmfol" path="res://Scene/NPC/不可移动NPC/塔台/子弹/子弹.gd" id="1_pnjhf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ita4j"]
+radial_segments = 8
+rings = 4
+
+[node name="Node3D" type="Node3D" unique_id=1326771195]
+script = ExtResource("1_pnjhf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1124921711]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("SphereMesh_ita4j")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1698079429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04250148)
+target_position = Vector3(0, 0, -1)
+hit_back_faces = false

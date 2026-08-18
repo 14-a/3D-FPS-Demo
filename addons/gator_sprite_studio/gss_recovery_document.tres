@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="GatorSpriteDocument" format=4 uid="uid://4ktfkcxjxoo3"]
+
+[ext_resource type="Script" uid="uid://djgd24ekkf1o1" path="res://addons/gator_sprite_studio/core/gator_sprite_animation.gd" id="1_fwt4o"]
+[ext_resource type="Script" uid="uid://cn7je47j0pcrs" path="res://addons/gator_sprite_studio/core/gator_sprite_layer_group.gd" id="2_37wp2"]
+[ext_resource type="Script" uid="uid://bpuenpvwopjef" path="res://addons/gator_sprite_studio/core/gator_sprite_layer.gd" id="3_tiq2r"]
+[ext_resource type="Script" uid="uid://bbr7tsdgm1gaq" path="res://addons/gator_sprite_studio/core/gator_sprite_cel.gd" id="4_7wp06"]
+[ext_resource type="Script" uid="uid://cq0hoxtvckg6t" path="res://addons/gator_sprite_studio/core/gator_sprite_document.gd" id="5_rsv3f"]
+[ext_resource type="Script" uid="uid://b4e4hykk7rat6" path="res://addons/gator_sprite_studio/core/gator_sprite_slice.gd" id="6_pucgx"]
+[ext_resource type="Script" uid="uid://cjk4fgj620poh" path="res://addons/gator_sprite_studio/core/gator_sprite_tag.gd" id="7_xtkou"]
+[ext_resource type="Script" uid="uid://bg2u06mdlkfu" path="res://addons/gator_sprite_studio/core/gator_sprite_tilemap.gd" id="8_7bywy"]
+[ext_resource type="Script" uid="uid://5ku1h2mgktkk" path="res://addons/gator_sprite_studio/core/gator_sprite_tileset.gd" id="9_x8j34"]
+
+[sub_resource type="Resource" id="Resource_fwt4o"]
+script = ExtResource("1_fwt4o")
+
+[sub_resource type="Resource" id="Resource_37wp2"]
+script = ExtResource("4_7wp06")
+png_bytes = PackedByteArray("iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAABpJREFUWIXtwQEBAAAAgiD/r25IQAEAAADvBhAgAAFHAaCIAAAAAElFTkSuQmCC")
+
+[sub_resource type="Resource" id="Resource_tiq2r"]
+script = ExtResource("3_tiq2r")
+layer_title = "Layer 1"
+cels = Array[ExtResource("4_7wp06")]([SubResource("Resource_37wp2")])
+
+[sub_resource type="Resource" id="Resource_7wp06"]
+script = ExtResource("6_pucgx")
+
+[sub_resource type="Resource" id="Resource_rsv3f"]
+script = ExtResource("8_7bywy")
+cells = PackedInt32Array(-1)
+
+[sub_resource type="Resource" id="Resource_pucgx"]
+script = ExtResource("9_x8j34")
+source_png = PackedByteArray()
+
+[resource]
+script = ExtResource("5_rsv3f")
+palette = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0.25, 0.72, 0.32, 1, 0.12, 0.22, 0.16, 1)
+layers = Array[ExtResource("3_tiq2r")]([SubResource("Resource_tiq2r")])
+tileset = SubResource("Resource_pucgx")
+tilemap = SubResource("Resource_rsv3f")
+animations = Array[ExtResource("1_fwt4o")]([SubResource("Resource_fwt4o")])
+slices = Array[ExtResource("6_pucgx")]([SubResource("Resource_7wp06")])

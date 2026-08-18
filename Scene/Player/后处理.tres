@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c361avpjw0guq"]
+
+[ext_resource type="Shader" uid="uid://j0phwpwdne32" path="res://Scene/Player/后处理_.gdshader" id="1_w1p24"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_w1p24")
+shader_parameter/edge_colour = Color(0, 0, 0, 1)
+shader_parameter/edge_width = 2.0
+shader_parameter/depth_edge_threshold = 6.90999984554768
+shader_parameter/max_dist = 1000.0
+shader_parameter/colour_pallet = PackedColorArray(1, 0.93, 0.7, 1, 1, 0.874, 0.45999998, 1, 1, 0.8106667, 0.29000002, 1, 1, 0.7, 0, 1, 1, 0.56666666, 0, 1)
+shader_parameter/use_converted_pallet = false
+shader_parameter/converted_pallet = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/shadow_edge_width = 4.0
+shader_parameter/miniumum_darkness = 1.3330000633174999

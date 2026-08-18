@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dnk6frjd5yh1v"]
+
+[ext_resource type="Script" uid="uid://c5d187olwj0gr" path="res://光束.gd" id="1_s7r28"]
+
+[node name="光束" type="Node3D" unique_id=692313473]
+script = ExtResource("1_s7r28")
+"最大长度" = 8.82
+"光束内焰颜色" = Color(0, 0.61666656, 1, 1)
+"光束外焰颜色" = Color(0, 0.61666656, 1, 0.36862746)
+"亮度" = 5.0
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1036293078]
+target_position = Vector3(0, 0, -8.82)
+debug_shape_thickness = 5

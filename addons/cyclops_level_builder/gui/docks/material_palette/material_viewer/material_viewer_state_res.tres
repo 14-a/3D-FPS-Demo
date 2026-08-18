@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_3sifp")
-active_material_path = "res://Texture/LevelMoulde/Well.tres"
+active_material_path = "res://addons/cyclops_level_builder/materials/tool_object_active_material.tres"

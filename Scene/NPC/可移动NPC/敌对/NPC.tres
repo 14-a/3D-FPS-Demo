@@ -1,0 +1,6 @@
+[gd_resource type="Resource" format=3 uid="uid://b1y7emutin8mf"]
+
+[ext_resource type="Script" uid="uid://ciehh5dvb3768" path="res://Scene/NPC/可移动NPC/敌对/NPC_Data.gd" id="1_rib4l"]
+
+[resource]
+script = ExtResource("1_rib4l")

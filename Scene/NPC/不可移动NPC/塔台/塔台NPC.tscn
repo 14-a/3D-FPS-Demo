@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dq1ag5nijnywx"]
+
+[ext_resource type="Material" uid="uid://blhle05g0b87t" path="res://Texture/LevelMoulde/LevelObjectMaterials/Red.tres" id="1_474jw"]
+[ext_resource type="Script" uid="uid://dixjmyla2e0xi" path="res://Scene/NPC/不可移动NPC/塔台/塔台npc.gd" id="1_qnive"]
+[ext_resource type="Script" uid="uid://br0wmf2uehgkr" path="res://Scene/NPC/不可移动NPC/塔台/node_3d_2.gd" id="3_x3yuo"]
+
+[node name="塔台npc" type="Node3D" unique_id=1518678098]
+script = ExtResource("1_qnive")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=451936666]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Node3D" unique_id=801199606]
+transform = Transform3D(0.96895933, -0.24722014, 0, 0.24722014, 0.96895933, 0, 0, 0, 1, 0.28068313, 0.944927, 0)
+material_override = ExtResource("1_474jw")
+radius = 0.024
+height = 1.9648438
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Node3D" unique_id=1750079036]
+transform = Transform3D(0.9690157, 0.24699901, 0, -0.24699901, 0.9690157, 0, 0, 0, 1, -0.25334167, 0.9295224, 0)
+material_override = ExtResource("1_474jw")
+radius = 0.024
+height = 1.9648438
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D" unique_id=1519153541]
+transform = Transform3D(-4.2354557e-08, 1.0806335e-08, -1, 0.24722014, 0.96895933, 0, 0.96895933, -0.24722014, -4.371139e-08, -1.2269049e-08, 0.944927, 0.28068313)
+material_override = ExtResource("1_474jw")
+radius = 0.024
+height = 1.9648438
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D" unique_id=1770715981]
+transform = Transform3D(-4.2357023e-08, -1.0796669e-08, -1, -0.24699901, 0.9690157, 0, 0.9690157, 0.24699901, -4.371139e-08, 1.1073916e-08, 0.9295224, -0.25334167)
+material_override = ExtResource("1_474jw")
+radius = 0.024
+height = 1.9648438
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D" unique_id=1721633985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.838213, 0)
+material_override = ExtResource("1_474jw")
+size = Vector3(0.25, 0.117, 0.25)
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=2000623228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.054069, 0)
+script = ExtResource("3_x3yuo")
+P = Vector3(0, -90, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3D2" unique_id=194783110]
+material_override = ExtResource("1_474jw")
+radius = 0.14848103
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D2" unique_id=2102288351]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.024302125, 0.012699842, -0.63785255)
+material_override = ExtResource("1_474jw")
+radius = 0.033
+height = 1.4511719
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D2" unique_id=1744546098]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.024302125, -0.017187595, -0.4686631)
+material_override = ExtResource("1_474jw")
+radius = 0.028
+height = 1.112793
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1960119561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2163718, 0)
+target_position = Vector3(0, 0, -100)
+
+[node name="Node3D3" type="Node3D" parent="." unique_id=28146020]
